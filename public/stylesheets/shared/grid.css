@@ -1,0 +1,42 @@
+:root {
+    --cell-size: 5rem;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.grid {
+    margin: auto;
+    margin-top: 15vh;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+}
+
+.player {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.player1 {
+    background: black;
+}
+
+.player2 {
+    background: white;
+}
+
+.available {
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}

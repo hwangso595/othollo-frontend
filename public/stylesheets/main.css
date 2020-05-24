@@ -1,0 +1,9 @@
+@import 'shared/grid.css';
+
+:root {
+    font-size: 10px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
