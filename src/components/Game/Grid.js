@@ -62,7 +62,6 @@ function Grid({moveHandler, board, player, available, winner, playerType}) {
                     {createTable()}
                 </tbody>
             </table>
-            {winner ? 'Winner is '+ winner : ''}
         </div>
     );
 }
