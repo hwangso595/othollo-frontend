@@ -40,6 +40,7 @@ const Game = ({location}) => {
         socket.on('playerType', playerType => {
             setPlayerType(playerType);
         })
+        
         socket.on('move', data => {
             setGameData(data);
         })
@@ -49,7 +50,6 @@ const Game = ({location}) => {
     })
 
     const moveHandler = ({coord, player}) => {
-        console.log(coord);
         socket.emit('sendMove', {coord, player}, (message) => { 
             if(message) console.log(message);
         });
@@ -62,21 +62,25 @@ const Game = ({location}) => {
     }
 
     return (
-        <>
-            {playerType}
-            {playerType === gameData.player? 
-                <h2>Your turn</h2>
-                :
-                <h2>Opponent's turn</h2>
-            }
+        <div className="game-container">
+            <h2 className="player-display">
+                You are {playerType === 'player1' ? 'player 1' : playerType === 'player2' ? 'player 2' : 'a spectator'}
+            </h2>
+            <h2 className="turn-display">
+                {!gameData.winner ? playerType === gameData.player ? "Your turn" : "Opponent's turn" : ""}
+            </h2>
             
-            {gameData.player? Object.keys(gameData.available).length === 0? 
+            
+            
+            {(!gameData.winner && gameData.player && Object.keys(gameData.available).length === 0)? 
                 <h2>No moves available</h2>
                 :
                 ''
-                :
-                ''
             }
+
+            <h2 className="winner-display">
+                {gameData.winner ? playerType === gameData.winner? "You win!" : gameData.winner + " wins!" : ""}
+            </h2>
 
             {gameData.player?
                 <Grid 
@@ -91,11 +95,11 @@ const Game = ({location}) => {
                 'Loading'
             }
             {gameData.winner ? 
-                <button value="Play Again?" onClick={playAgain}></button>
+                <button className="btn btn-play-again" onClick={playAgain}>Play Again?</button>
                 :
                 ''
             }
-        </>
+        </div>
     );
 }
 

@@ -8,7 +8,7 @@ const BDLEN = 8, BDWIDTH = 8;
 function Grid({moveHandler, board, player, available, winner, playerType}) {
 
     useEffect(() => {
-        if (Object.keys(available).length === 0) {
+        if (Object.keys(available).length === 0 && !winner) {
             setTimeout(() => {
                 moveHandler({coord: null, player})
             }, 3000);
@@ -17,7 +17,6 @@ function Grid({moveHandler, board, player, available, winner, playerType}) {
 
     function coordInAvailable(available, coord) {
         let coordKey = coord[0]*BDWIDTH + coord[1];
-        console.log(coordKey + ' ' + available);
         return coordKey in available;
     }
 
@@ -57,7 +56,7 @@ function Grid({moveHandler, board, player, available, winner, playerType}) {
     }
 
     return (
-        <div className="container">
+        <div>
             <table className="grid">
                 <tbody>
                     {createTable()}
@@ -72,7 +71,7 @@ Grid.propTypes = {
     moveHandler: PropTypes.func,
     board: PropTypes.array,
     player: PropTypes.string,
-    available: PropTypes.array,
+    available: PropTypes.object,
     winner: PropTypes.string
 }
 

@@ -1,0 +1,96 @@
+.start-container {
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    height: 20rem;
+    background-color: var(--color-card-background);
+    border-radius: 1rem;
+    justify-content: space-around;
+}
+
+.header {
+    font-size: 3rem;
+    padding: 1rem;
+}
+
+.sub-header {
+    padding: 1rem;
+}
+
+.multiplayer-menu-container {
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: auto;
+    height: auto;
+    padding: 2rem;
+    background-color: var(--color-card-background);
+    border-radius: 1rem;
+}
+
+.form > * {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.row { 
+    display: flex;
+    align-items: flex-start;
+}
+
+.create-room, .join-room {
+    width: 20rem;
+}
+
+.sub-header {
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+#username {
+    width: 100%;
+}
+
+.in-progress{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.progress-info{
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 20%;
+}
+
+.in-progress:hover .progress-info {
+    visibility: visible;
+}
+
+.selection, .text-input {
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.or {
+    font-weight: 500;
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+.selection > option{
+    width: 105%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.danger-text {
+    font-size: 2rem;
+    color: var(--color-danger-text);
+}

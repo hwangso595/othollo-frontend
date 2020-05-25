@@ -1,0 +1,42 @@
+:root {
+    --color-btn-primary-text: hsl(var(--color-base-hue), 100%, 20%);
+    --color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
+    --color-btn-primary-text-dark: hsl(var(--color-base-hue), 100%, 10%);
+    --color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
+
+    --color-btn-submit-background: hsl(90, 100%, 50%);
+    --color-btn-submit-text: hsl(90, 100%, 20%);
+    
+    --color-btn-danger-text: black;
+    --color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
+    --color-btn-danger-text: black;
+    --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
+    --color-btn-border: black;
+}
+
+.btn {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: none;
+    box-shadow: 0 0 2px black;
+    margin: 2rem;
+}
+.btn-primary {
+    background-color: var(--color-btn-primary-background);
+    color: var(--color-btn-primary-text);
+}
+
+.btn-row {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    color: var(--color-btn-primary-text-dark);
+    background: var(--color-btn-primary-background-dark);
+}
+
+.btn-play-again {
+    color: var(--color-btn-submit-text);
+    background-color: var(--color-btn-submit-background)
+}

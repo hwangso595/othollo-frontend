@@ -4,8 +4,13 @@
 }
 
 table, th, td {
+    background-color: white;
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+table {
+    box-shadow: 0 0 3rem 0rem;
 }
 
 .grid {

@@ -32,7 +32,7 @@ function App() {
       {showMultiplayerOption && 
         <Route 
           path="/" exact
-          render={()=><MultiplayerMenu startGame={toggleStart}/>}
+          component={MultiplayerMenu}
         />
       }
       <Route path="/game" component={Game}/>

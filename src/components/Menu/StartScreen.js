@@ -5,9 +5,14 @@ const StartScreen = ({toggleOverlay, selectMultiplayer}) => {
 
     return (
         <div className="start-container">
-            Select Mode:
-            <button disabled>Single Player</button>
-            <button onClick={()=> {toggleOverlay(); selectMultiplayer();}}>Multiplayer</button>
+            <h2 className="header">Select Mode:</h2>
+            <div className="btn-row">
+                <div className="in-progress">
+                    <button className="btn btn-primary" disabled>Single Player</button>
+                    <span className="progress-info">Work in progress</span>
+                </div>
+                <button className="btn btn-primary" onClick={()=> {toggleOverlay(); selectMultiplayer();}}>Multiplayer</button>
+            </div>
         </div>
     );
 }

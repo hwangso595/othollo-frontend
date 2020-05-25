@@ -1,57 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import io from 'socket.io-client';
+import { Link } from 'react-router-dom';
 
-const MultiplayerMenu = ({toggleOverlay, startGame}) => {
+let socket;
+
+const MultiplayerMenu = ({location, history}) => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
-    const [newRoom, setNewRoom] = useState('');
+    const [error, setError] = useState({});
+    const [roomList, setRoomList] = useState([]);
+    //const ENDPOINT = 'https://othollo.herokuapp.com/';
+    const ENDPOINT = 'localhost:5000/';
 
-    const handleSubmit = async (event) => {
-        try{
-            if(!name || !newRoom) {
-                event.preventDefault();
-            } else {
-                startGame();
-                toggleOverlay();
-            }
-        } catch {
-            
+    useEffect(() => {
+        socket = io(ENDPOINT);
+
+        return () => {
+            socket.emit('disconnect');
+            socket.off();
         }
+    }, [])
+
+    useEffect(() => {
+        socket.emit('getRoomList', (rooms) => {
+            setRoomList(rooms);
+        })
+    })
+
+    const handleSubmit = (event, join) => {
+        socket.emit('checkUser', {name, room, join: join === 'join'}, (err) => { 
+            // error.type === '' || 'name' || 'joinRoom' || 'createRoom'
+            if(err) {
+                setError(err);
+            } else {
+                history.push(`/game?name=${name}&room=${room}`);
+            }
+        })
+        
     }
 
     return (
-        <div className="multiplayer-container">
-            <form action="/game" method="get">
-                <div className="form">
-                    <label htmlFor="name">Username</label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="username"
-                        placeholder="Enter username..."
-                        onChange={(e) => {setName(e.target.value)}}
-                        required
-                    />
-                </div>
-                <div class="form">
-                    <label htmlFor="room">Room</label>
-                    <select name="room" id="room" onChange={(e) => {setRoom(e.target.value)}} required>
-                        <option value="" disabled defaultValue>Select Room</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Python">Python</option>
-                        <option value="PHP">PHP</option>
-                        <option value="C#">C#</option>
-                        <option value="Ruby">Ruby</option>
-                        <option value="Java">Java</option>
+        <div className="multiplayer-menu-container">
+            <div className="form username-box">
+                <label className="sub-header" htmlFor="name">Username</label>
+                <input
+                    className="text-input" 
+                    type="text"
+                    name="name"
+                    id="username"
+                    placeholder="Enter username..."
+                    onChange={(e) => {setName(e.target.value)}}
+                />
+                <p className="danger-text">{error.type === 'name'? error.message : ''}</p>
+            </div>
+            <div className="form row">
+                <div className="join-room">
+                    <label className="sub-header" htmlFor="room">Join a room</label>
+                    <select className="selection" name="room" id="room" onChange={(e) => {setRoom(e.target.value)}} size="5" required>
+                        <option value="" disabled selected>Select room...</option>
+                        {roomList.map(room => {
+                            return <option value={room}>{room}</option>;
+                        })}
                     </select>
+                    <p className="danger-text">{error.type === 'joinRoom'? error.message : ''}</p>
+                    <button className="btn btn-primary" onClick={(e) => {handleSubmit(e, 'join')}}>Join!</button>
                 </div>
-                <button type="submit" class="btn">Join Room</button>
-            </form>
-            <h2>OR</h2>
-            <form onSubmit={handleSubmit} action="/game" method="get">
-                <input type="hidden" name="name" value={name}></input>
-                <input placeholder="Room" type="text" name="room" onChange={(e)=> {setNewRoom(e.target.value)}}></input>
-                <button type="submit">Create Room</button>
-            </form>
+                <h2 className="or">OR</h2>
+                <div className="create-room">
+                    <input type="hidden" name="name" value={name}></input>
+                    <label className="sub-header" htmlFor="room">Create a room</label>
+                    <input className="text-input" placeholder="Enter room name..." type="text" name="room" onChange={(e)=> {setRoom(e.target.value)}}></input>
+                    <p className="danger-text">{error.type === 'createRoom'? error.message : ''}</p>
+                    <button className="btn btn-primary" onClick={(e) => {handleSubmit(e, 'create')}} type="submit">Create!</button>
+                </div>
+            </div>
         </div>
     );
 }

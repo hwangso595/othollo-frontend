@@ -1,0 +1,26 @@
+.game-container {
+    padding: 3rem;
+    background: rgb(96,96,96);
+    background: linear-gradient(90deg, rgba(96,96,96,1) 0%, rgba(86,93,89,1) 100%);
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+}
+
+.player-display {
+    font-size: 3rem;
+}
+
+.turn-display {
+    font-size: 2rem;
+}
+
+.winner-display {
+    font-size: 4rem;
+    color: var(--color-text-light)
+}
+
+.play-again {
+    font-size: 1.5rem;
+}
