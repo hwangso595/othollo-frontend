@@ -8,19 +8,22 @@
 html, body, #root{
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center; 
+    text-align: center;
 }
 
 :root {
-    font-family: 'Varula Round', Tahoma, Sans-Serif;
+    font-family: 'Varela Round', serif;
+    font-weight: normal;
+    font-style: normal;
     font-size: 10px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    text-align: center;
 }
 
 *, *::before, *::after {
     box-sizing: border-box;
+    font-family: 'Varela Round';
+    
 }
 
 .row {

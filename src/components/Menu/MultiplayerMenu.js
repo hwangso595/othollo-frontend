@@ -9,8 +9,8 @@ const MultiplayerMenu = ({location, history}) => {
     const [room, setRoom] = useState('');
     const [error, setError] = useState({});
     const [roomList, setRoomList] = useState([]);
-    //const ENDPOINT = 'https://othollo.herokuapp.com/';
-    const ENDPOINT = 'localhost:5000/';
+    const ENDPOINT = 'https://othollo.herokuapp.com/';
+    // const ENDPOINT = 'localhost:5000/';
 
     useEffect(() => {
         socket = io(ENDPOINT);
@@ -57,7 +57,7 @@ const MultiplayerMenu = ({location, history}) => {
                 <div className="join-room">
                     <label className="sub-header" htmlFor="room">Join a room</label>
                     <select className="selection" name="room" id="room" onChange={(e) => {setRoom(e.target.value)}} size="5" required>
-                        <option value="" disabled selected>Select room...</option>
+                        <option value="" disabled defaultValue>Select room...</option>
                         {roomList.map(room => {
                             return <option value={room}>{room}</option>;
                         })}
